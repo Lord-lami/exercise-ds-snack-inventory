@@ -18,7 +18,7 @@ class Snack:
         Snack("Pretzel", 3, 12).value() -> 36
         Snack("Trail Mix", 4, 0).value() -> 0
         """
-        return 0
+        return self.price * self.count
 
 
 def find_snack(snacks, name):
@@ -30,6 +30,9 @@ def find_snack(snacks, name):
     find_snack(snacks, "Trail Mix") -> the Trail Mix snack
     find_snack(snacks, "Popcorn") -> None
     """
+    for i, _ in enumerate(snacks):
+        if snacks[i].name == name:
+            return snacks[i]
     return None
 
 
@@ -40,7 +43,10 @@ def total_value(snacks):
 
     total_value(the stand's four snacks) -> 138
     """
-    return 0
+    total = 0
+    for s in snacks:
+        total += s.value()
+    return total
 
 
 def low_stock(snacks, limit):
@@ -51,4 +57,4 @@ def low_stock(snacks, limit):
     low_stock(snacks, 10) -> ["Trail Mix"]
     low_stock(snacks, 16) -> ["Pretzel", "Trail Mix", "Apple Chips"]
     """
-    return []
+    return [s.name for s in snacks if s.count < limit]
